@@ -3954,6 +3954,7 @@ const gltfLoader = new GLTFLoader();
 const fbxLoader = new FBXLoader();
 const daeLoader = new ColladaLoader();
 
+var done = false;
 function loadObj(options, cb, promise) {
 
 	if (options === undefined) return console.error("Invalid options provided to loadObj()");
@@ -3970,7 +3971,10 @@ function loadObj(options, cb, promise) {
 		case "gltf":
 		case "glb":
 			// [jscastro] Support for GLTF/GLB
-			gltfLoader.setDRACOLoader(options.draco)
+			if(!done) {
+				gltfLoader.setDRACOLoader(options.draco)
+done = true;
+			}
 			loader = gltfLoader;
 			break;
 		case "fbx":
